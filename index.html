@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Side A — animated music player</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- floating animated music icons (dark) -->
+  <div class="float-icons">
+    <span class="float-icon">♪</span>
+    <span class="float-icon">♫</span>
+    <span class="float-icon">♩</span>
+    <span class="float-icon">♬</span>
+    <span class="float-icon">♪</span>
+    <span class="float-icon">♫</span>
+    <span class="float-icon">♩</span>
+  </div>
+
+  <div class="bg-anim">
+    <div class="bg-blob bg-blob-1"></div>
+    <div class="bg-blob bg-blob-2"></div>
+    <div class="bg-blob bg-blob-3"></div>
+    <div class="bg-noise"></div>
+  </div>
+
+  <div class="stage">
+
+    <div class="player">
+      <div class="cassette">
+        <div class="cassette-glow"></div>
+        <div class="cassette-label">
+          <span class="side">SIDE A</span>
+          <span class="title" id="cassetteTitle">Loading tracks…</span>
+        </div>
+        <div class="reels">
+          <div class="reel" id="reelLeft"><div class="hub"></div></div>
+          <div class="reel" id="reelRight"><div class="hub"></div></div>
+        </div>
+        <canvas id="visualizer" class="visualizer" height="44"></canvas>
+      </div>
+
+      <div class="now-playing">
+        <p class="np-title" id="npTitle">✨ drop your music</p>
+        <p class="np-artist" id="npArtist">— ready —</p>
+      </div>
+
+      <div class="progress-row">
+        <span class="time" id="timeCurrent">0:00</span>
+        <input type="range" id="seek" class="seek" min="0" max="100" value="0" step="0.1">
+        <span class="time" id="timeTotal">0:00</span>
+      </div>
+
+      <div class="controls">
+        <button class="ctrl" id="btnShuffle" title="Shuffle" aria-label="Toggle shuffle">
+          <svg viewBox="0 0 24 24"><path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></svg>
+        </button>
+        <button class="ctrl" id="btnPrev" aria-label="Previous">
+          <svg viewBox="0 0 24 24"><path d="M19 20L9 12l10-8v16zM5 19V5"/></svg>
+        </button>
+        <button class="ctrl ctrl-play" id="btnPlay" aria-label="Play/pause">
+          <svg id="iconPlay" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          <svg id="iconPause" viewBox="0 0 24 24" style="display:none;"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg>
+        </button>
+        <button class="ctrl" id="btnNext" aria-label="Next">
+          <svg viewBox="0 0 24 24"><path d="M5 4l10 8-10 8V4zM19 5v14"/></svg>
+        </button>
+        <button class="ctrl" id="btnRepeat" title="Repeat" aria-label="Toggle repeat">
+          <svg viewBox="0 0 24 24"><path d="M17 2l4 4-4 4M3 11V9a4 4 0 014-4h14M7 22l-4-4 4-4M21 13v2a4 4 0 01-4 4H3"/></svg>
+        </button>
+      </div>
+
+      <div class="volume-row">
+        <svg viewBox="0 0 24 24" class="vol-icon"><path d="M11 5L6 9H2v6h4l5 4V5zM19 5a9 9 0 010 14M15.5 8.5a5 5 0 010 7"/></svg>
+        <input type="range" id="volume" class="volume" min="0" max="100" value="70">
+      </div>
+    </div>
+
+    <aside class="playlist-panel">
+      <div class="panel-head">
+        <h2><span>📼</span> Playlist</h2>
+        <label class="add-btn" for="fileInput">➕ Add</label>
+        <input type="file" id="fileInput" accept="audio/*" multiple hidden>
+      </div>
+      <ul class="playlist" id="playlist">
+        <li class="empty-state" id="emptyState" style="display:none;">No tracks — add your own audio</li>
+      </ul>
+      <div class="dropzone" id="dropzone">🎵 drag & drop audio files here</div>
+    </aside>
+  </div>
+
+  <footer>CodeAlpha · animated music player · like · download · upload</footer>
+
+  <audio id="audio" crossorigin="anonymous"></audio>
+
+  <script src="script.js"></script>
+</body>
+</html>
